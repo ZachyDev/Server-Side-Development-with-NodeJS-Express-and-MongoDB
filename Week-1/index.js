@@ -2,15 +2,15 @@
 let rect = require('./rectangle');
 
 const solveRectangle = (l,b) => {
-    console.log(`Solving for rectangle with length ${l} and breadth ${b}`);
-
-    if ( l <=0 || b <=0) {
-        console.log(`The legth and breadth must be greater than zero.`);
-    }
-    else {
-        console.log(`The perimeter of the rectangle is ${ rect.perimeter(l,b)}`);
-        console.log(`The area of the rectangle is ${ rect.area(l,b) }`);
-    }
+    rect(l,b, (err, rectangle) => {
+        if ( err ) {
+            console.log(err.message);
+        }
+        else {
+            console.log(`Area: ${rectangle.area()}`);
+            console.log(`Perimeter: ${rectangle.perimter()}`);
+        }
+    })
 }
 
 
