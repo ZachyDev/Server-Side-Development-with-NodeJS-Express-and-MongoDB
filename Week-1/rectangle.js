@@ -8,7 +8,7 @@ module.exports = (x,y,callback) => {
         setTimeout(() => callback(null,
             {
                 area: () => x*y,
-                perimter: () => 2*(x+y)
+                perimeter: () => 2*(x+y)
             }
             ),2000)
     }
