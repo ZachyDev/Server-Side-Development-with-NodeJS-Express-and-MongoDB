@@ -8,7 +8,7 @@ const solveRectangle = (l,b) => {
         }
         else {
             console.log(`Area: ${rectangle.area()}`);
-            console.log(`Perimeter: ${rectangle.perimter()}`);
+            console.log(`Perimeter: ${rectangle.perimeter()}`);
         }
     })
 }

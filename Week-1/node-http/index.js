@@ -5,47 +5,59 @@ const fs = require('fs');
 const path = require('path');
 
 const hostname = 'localhost';
-const port = 3000;
 
+const port = 4000;
+
+// create a web server
 const server = http.createServer((req,res) => {
-    console.log(`Request for ${ req.url } using ${ req.method } method.`);
+    console.log(`Request url ${ req.url } using ${ req.method }`);
 
-    if( req.method == 'GET' ) {
+    if ( req.method == 'GET' ) {
         let fileUrl;
 
-        if ( req.url == '/') fileUrl = '/index.html';
-        else fileUrl = req.url;
+        if ( req.url == '/' ) fileUrl = '/index.html'
+        else {
+            fileUrl = req.url;
+        }
 
-        let filePath = path.resolve('./public' + fileUrl);  
-        let fileExt = path.extname(filePath);
+    // define file path
+    let filePath = path.resolve('./public' + fileUrl);
+    let fileExt = path.extname(filePath);
 
-        if (fileExt == '.html') {
-            fs.exists(filePath, (exists) => {
-                if (!exists) {
-                    res.statusCode = 404;
-                    res.setHeader('Content-Type', 'text/html');
-                    res.end('<html><body><h1>Error: 404 ' + req.url + ' not found</h1></body></html>');
-                }
+    if( fileExt == '.html') {
+        fs.exists(filePath, exists => {
+            if (! exists ) {
+                res.statusCode = 404;
+                res.setHeader('Content-Type', 'text/html');
+                res.end(`404 Error: ${ filePath } not found`);
+            }
+            else {
                 res.statusCode = 200;
-                // res.setHeader('Content-Type', 'text/html');
+                res.setHeader('Content-Type', 'text/html');
                 fs.createReadStream(filePath).pipe(res);
-                // return;
-            })
-        }
-        else {
-                    res.statusCode = 200;
-                    res.setHeader('Content-Type', 'text/html');
-                    res.end('<html><body><h1>Error: 404 ' + fileExt + 'is not html extension </h1></body></html>');
-        }
+            }
+        })
     }
-        else {
-            res.statusCode = 404;
-            res.setHeader('Content-Type', 'text/html');
-            res.end('<html><body><h1>Error: 404 ' + req.method + ' not supported</h1></body></html>');
-        }
+    else {
+        res.statusCode = 404;
+        res.setHeader('Content-Type', 'text/html');
+        res.end(`${ fileExt } is not an html extension`)
+    }
+}
+
+else {
+    res.statusCode = 404;
+    res.setHeader('Content-Type', 'text/html');
+    res.end(`${ req.method } is not supported`);
+}
 
 })
 
-server.listen(`${ port }`, `${ hostname }`, () => {
-    console.log(`Server running at https://${ hostname }:${ port }/`);
-})
+// listen to port
+
+server.listen(port, hostname, (err) => {
+    if (err) console.log(err);
+    else {
+        console.log(`Server running on https://${ hostname } : ${ port }`);
+    }
+})  
