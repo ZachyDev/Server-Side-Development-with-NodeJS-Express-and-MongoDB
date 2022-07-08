@@ -1,15 +1,17 @@
 {
-  "name": "node-examples",
+  "name": "express",
   "version": "1.0.0",
-  "description": "Simple Node Examples",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node index.js"
   },
-  "author": "Zachary Moseti (ZachyDev)",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "morgan": "^1.10.0"
   }
 }
