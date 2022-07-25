@@ -1,17 +1,17 @@
 {
-  "name": "mongo",
+  "name": "node-mongo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node MongoDB application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "assert": "^2.0.0",
-    "mongodb": "^4.8.0"
+    "mongodb": "^4.8.0",
+    "node-mongo": "^0.0.1"
   }
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const leadersRoute = express.Router();
+leadersRoute.use(bodyParser);
 leadersRoute.use(bodyParser.json());
 
 leadersRoute.route('/', (req,res,next) => {
