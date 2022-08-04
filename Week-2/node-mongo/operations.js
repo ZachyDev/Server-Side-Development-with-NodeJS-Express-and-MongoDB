@@ -3,43 +3,28 @@ const assert = require('assert');
 const insertDocument = (db,document,collection,callback) => {
     
     const col = db.collection(collection);
-
     // insert a document
-    col.insertOne(document,(err,result) => {
-        assert.equal(err,null);
-        callback(result);
-    })
+    return col.insertOne(document);
 }
 
 const findDocument = (db,collection,callback) => {
     const col = db.collection(collection);
     // find document
-    col.find({}).toArray((err,docs) => {
-        assert.equal(err,null);
-        callback(docs);
-    })
+    return col.find({}).toArray();
 }
 
 // delete operation
 
 const removeDocument = (db,collection,document,callback) => {
-    const col = db.collection(collection);
-
+    const col = db.collection(collection)
     // remote document from collection
-    col.deleteOne(document,(err,result) => {
-        assert.equal(err,null);
-        callback(result);
-    })
+    return col.deleteOne(document);
 }
 
 // update operation
-const updateDocument = (db,document,update,collection, callback) => {
+const updateDocument = (db,document,update,collection,callback) => {
     const col = db.collection(collection);
-
-    col.updateOne(document, {$set: update }, (err,result) => {
-        assert.equal(err,null);
-        callback(result);
-    })
+    return col.updateOne(document, {$set: update }, null)
 }
 
 module.exports = { insertDocument,findDocument,removeDocument,updateDocument };
